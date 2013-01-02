@@ -10,7 +10,7 @@ class Pronamic_Feeds
 
 	public function initialize()
 	{
-		load_plugin_textdomain( 'pronamic_feeds', false, plugins_url( __FILE__ ) );
+		load_plugin_textdomain( 'pronamic_feeds', false, plugins_url( __FILE__ ) . '/lang' );
 
 	}
 

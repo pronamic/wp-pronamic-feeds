@@ -4,13 +4,27 @@ class Pronamic_Feeds_Admin
 {
 	public function __construct()
 	{
+		// Loads the required javascript
+		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts') );
+
+		add_action( 'admin_init', array( $this, 'register_settings' ) );
+
+		// Metaboxes
 		add_action( 'add_meta_boxes', array( $this, 'metaboxes' ) );
 
+		// Intercept save post
 		add_action( 'save_post', array( $this, 'save_details_metabox' ) );
 
-		add_action( 'admin_menu', array( $this, 'feeds_messages' ) );
+		// Addition of a custom sub menu page
+		add_action( 'admin_menu', array( $this, 'submenus' ) );
 
-		add_action( 'wp_ajax_add_post', array( $this, 'add_post_from_message' ) );
+		// Ajax methods
+		add_action( 'wp_ajax_add_message', array( $this, 'add_post_from_message' ) );
+	}
+
+	public function register_admin_scripts()
+	{
+		wp_enqueue_script( 'pronamic_feeds_admin', plugins_url('pronamic-feeds/assets/admin/pronamic_feeds_admin.js' ), 'jquery' );
 	}
 
 	public function metaboxes()
@@ -55,33 +69,66 @@ class Pronamic_Feeds_Admin
 			update_post_meta( $post_id, 'pronamic_feed_url' , $pronamic_feed_url );
 	}
 
-	public function feeds_messages()
+	public function submenus()
 	{
 		add_submenu_page( 
 			'edit.php?post_type=pronamic_feed', 
-			__('Messages', 'pronamic_feeds'), 
-			__('Feeds Messages', 'pronamic_feeds'), 
+			__( 'Messages', 'pronamic_feeds' ), 
+			__( 'Feeds Messages', 'pronamic_feeds' ), 
 			'edit_posts', 
 			'pronamic_feeds_messages', 
-			array( $this, 'display_feeds_messages' ) );
+			array( $this, 'display_feeds_messages' ) 
+		);
+
+		add_submenu_page(
+			'edit.php?post_type=pronamic_feed',
+			__( 'Options', 'pronamic_feeds' ),
+			__( 'Options', 'pronamic_feeds' ),
+			'edit_posts',
+			'pronamic_feeds_options',
+			array( $this, 'display_options' )
+		);
 	}
 
 	public function display_feeds_messages()
 	{
-		$feeds = new Wp_Query(array(
+		$feeds = new Wp_Query( array(
 			'post_type' => 'pronamic_feed'
-		));
+		) );
+
+		// Get all posts with a set feed id
+		$posts = new Wp_Query( array(
+            'post_type'     => 'post',
+            'meta_query'    => array(
+				array(
+					'key' => '_pronamic_feed_id',
+				)
+			)
+		) );
+
+		// Array of all existing feed ids
+		$existing_ids = array();
+
+		if( $posts->have_posts() )
+		{
+			foreach( $posts->posts as $post )
+			{
+				$existing_ids[] = get_post_meta( $post->ID, '_pronamic_feed_id', true );
+			}
+		}	
 
 		Pronamic_Loader::view( 'views/admin/display_feeds_messages', array(
-			'feeds' => $feeds,
+            'feeds'             => $feeds,
+            'existing_ids'      => $existing_ids
 		) );
 	}
 
 	public function add_post_from_message()
 	{
 		// Get POST information
-		$message_id = filter_var( INPUT_POST, 'message_id', FILTER_SANITIZE_STRING );
-		$feed_url = filter_var( INPUT_POST, 'message_full_url', FILTER_VALIDATE_URL );		
+        $message_id     = filter_input( INPUT_POST, 'message_id', FILTER_VALIDATE_INT );
+        $hashed_id      = filter_input( INPUT_POST, 'hashed_id', FILTER_SANITIZE_STRING );
+        $feed_url       = filter_input( INPUT_POST, 'feed_url', FILTER_VALIDATE_URL );
 
 		// Get the feed from the 
 		$rss = fetch_feed( $feed_url );
@@ -97,36 +144,40 @@ class Pronamic_Feeds_Admin
 		$messages = $rss->get_items( 0, $total );
 
 		// CHecks there are messages and a message with the passed array id
-		if(empty($messages) || empty($messages[$message_id]))
-			exit;
+		if(empty($messages) || empty($messages[$message_id]) )
+			$this->_ajax_response( 'error', __( 'Error', 'pronamic_feeds' ), __( 'No message exists! Try refreshing!', 'pronamic_feeds' ) );
 
 		// Gets the chosen message and cleans up memory
 		$chosen_message = $messages[$message_id];
 		unset($messages);
 
-		// Change to be determined from a setting, either the post date
-		// or the date of the website.
+		$post = new Wp_Query( array(
+            'post_type'     => 'post',
+            'meta_query'    => array(
+				array(
+                    'key'       => '_pronamic_feed_id',
+                    'value'     => $chosen_message->get_id( true )
+				)
+			)
+		) );
 
-		// Sets the current time
-		$post_date = new DateTime();
-
-		// Sets the GMT Time
-		$post_date_gmt = new DateTime();
-		$post_date_gmt->setTimezone(new DateTimeZone( 'Europe/London' ) );
+		// Determine if they already exist
+		if( $post->have_posts() )
+			$this->_ajax_response('error', __( 'Error', 'pronamic_feeds' ), __('That message already exists', 'pronamic_feeds') );
 
 		// Generate post array of information
 		$post = array(
-			'comment_status' => 'closed', // add setting on options page
-			'ping_status' => 'closed', // add setting
-			'post_author' => get_current_user_id(),
-			'post_content' => $chosen_message->get_description(),
-			'post_excerpt' => '', // base off setting wether to get excerpt or not
-			'post_name' => sanitize_title_with_dashes( $chosen_message->get_title() ),
-			'post_parent' => null,
-			'post_password' => null,
-			'post_status' => 'publish', // base off setting wether to require moderation
-			'post_title' => $chosen_message->get_title(),
-			'post_type' => 'post' // base off input text setting
+            'comment_status'    => 'closed', // add setting on options page
+            'ping_status'       => 'closed', // add setting
+            'post_author'       => get_current_user_id(),
+            'post_content'      => $chosen_message->get_content(),
+            'post_excerpt'      => '', // base off setting wether to get excerpt or not
+            'post_name'         => sanitize_title_with_dashes( $chosen_message->get_title() ),
+            'post_parent'       => null,
+            'post_password'     => null,
+            'post_status'       => 'publish', // base off setting wether to require moderation
+            'post_title'        => $chosen_message->get_title(),
+            'post_type'         => 'post' // base off input text setting
 		);
 
 		// Adds the new post
@@ -136,7 +187,51 @@ class Pronamic_Feeds_Admin
 		update_post_meta( $post_id, '_pronamic_feed_id', $chosen_message->get_id( true ) );
 		update_post_meta( $post_id, '_pronamic_feed_url', $chosen_message->get_permalink() );
 		update_post_meta( $post_id, '_pronamic_feed_post_url', $feed_url );
+
+		// Respond back
+		$this->_ajax_response( 'success', __( 'Success', 'pronamic_feeds' ), __( 'Successfully added the message to your posts!', 'pronamic_feeds') );
 		
+	}
+
+	public function display_options()
+	{
+		Pronamic_Loader::view( 'views/admin/display_options' );
+	}
+
+	public function register_settings()
+	{
+		// Class to handle view of inputs callbacks
+		$input = new Pronamic_Settings;
+
+		// Settings sections
+		add_settings_section( 'pronamic_feeds_options', __( 'Options', 'pronamic_feeds' ), array( $this, 'settings_section' ), 'pronamic_feeds_options' );
+
+		// Settings fields for the options section
+		add_settings_field( 'pronamic_feeds_posts_per_feed', __( 'Posts per feed', 'pronamic_feeds' ), array( $input, 'text' ), 'pronamic_feeds_options', 'pronamic_feeds_options', array( 'name' => 'pronamic_feeds_posts_per_feed' ) );
+
+		// Registered settings
+		register_setting( 'pronamic_feeds_options', 'pronamic_feeds_posts_per_feed' );
+
+	}
+
+	public function settings_section() {}
+
+	/**
+	 * A response for the ajax request to add the message to the posts
+	 * 
+	 * @param type | String | The Type of response, Supports error|success
+	 * @param title | String | The title to show in the flash message
+	 * @param message | String | The actual message to respond back with
+	 */
+	private function _ajax_response($type, $title, $message)
+	{
+		echo json_encode( array(
+            'type'      => $type,
+            'title'     => $title,
+            'message'   => $message
+		) );
+
+		exit;
 	}
 
 }
