@@ -20,8 +20,10 @@ class Pronamic_Feeds_Admin {
 		add_action( 'wp_ajax_add_message', array( $this, 'add_post_from_message' ) );
 	}
 
-	public function register_admin_scripts() {
-		wp_enqueue_script( 'pronamic_feeds_admin', plugins_url( 'pronamic-feeds/assets/admin/pronamic_feeds_admin.js' ), 'jquery' );
+	public function register_admin_scripts( $hook ) {
+
+		if ( 'edit.php' == $hook )
+			wp_enqueue_script( 'pronamic_feeds_admin', plugins_url( 'pronamic-feeds/assets/admin/pronamic_feeds_admin.js' ), 'jquery' );
 	}
 
 	public function metaboxes() {
