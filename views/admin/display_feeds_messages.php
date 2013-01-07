@@ -17,7 +17,7 @@
             <?php $feed_url     = get_post_meta( $feed->ID, 'pronamic_feed_url', true ); ?>
             <?php $rss          = fetch_feed( $feed_url );?>
 			<tr>
-				<td><a href="<?php echo get_edit_post_link( "$feed->ID" );?>" title="<?php echo $feed_url; ?>"><?php echo $feed->post_title;?></td>
+				<td><a href="<?php echo get_edit_post_link($feed->ID);?>" title="<?php echo $feed_url; ?>"><?php echo $feed->post_title;?></td>
 				<td>
 					<?php if ( ! is_wp_error( $rss ) ): ?>
 						<?php $total = ( get_option( 'pronamic_feeds_posts_per_feed' ) ?: 0 ) ;?>
