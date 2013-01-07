@@ -1,14 +1,14 @@
 <script type="text/javascript">
 	jQuery(Pronamic_Feeds_Admin.rss.ready);
 </script>
-<h2><?php echo __( 'Feeds Messages', 'pronamic_feeds' );?></h2>
+<h2><?php _e( 'Feeds Messages', 'pronamic_feeds' );?></h2>
 <div class="message_holder">
 </div>
 <table class="widefat">
 	<thead>
 		<tr>
-			<th><?php echo __( 'Feed', 'pronamic_feeds' );?></th>
-			<th><?php echo __( 'Messages', 'pronamic_feeds' );?></th>
+			<th><?php _e( 'Feed', 'pronamic_feeds' );?></th>
+			<th><?php _e( 'Messages', 'pronamic_feeds' );?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -21,8 +21,8 @@
 				<td>
 					<?php if ( ! is_wp_error( $rss ) ): ?>
 						<?php $total = ( get_option( 'pronamic_feeds_posts_per_feed' ) ?: 0 ) ;?>
-                        <?php $total_messages   = $rss->get_item_quantity( $total ); ?>
-                        <?php $messages         = $rss->get_items( 0, $total_messages ); ?>
+            <?php $total_messages   = $rss->get_item_quantity( $total ); ?>
+            <?php $messages         = $rss->get_items( 0, $total_messages ); ?>
 						<?php if ( ! empty( $messages ) ): ?>
 							<table style="width:100%">
 								<?php foreach ( $messages as $key => $message ): ?>
