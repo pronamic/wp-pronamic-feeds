@@ -40,6 +40,15 @@ class Pronamic_Feeds_Admin {
 			'normal',
 			'high'
 		);
+
+		add_meta_box(
+			'pronamic_feeds_data',
+			__('Feed Info', 'pronamic_feeds'),
+			array($this, 'display_feed_data_metabox'),
+			'post',
+			'side',
+			'high'
+		);
 	}
 
 	public function display_details_metabox() {
@@ -181,12 +190,21 @@ class Pronamic_Feeds_Admin {
 
 		// Update meta information for this new post
 		update_post_meta( $post_id, '_pronamic_feed_id', $chosen_message->get_id( true ) );
-		update_post_meta( $post_id, '_pronamic_feed_url', $chosen_message->get_permalink() );
-		update_post_meta( $post_id, '_pronamic_feed_post_url', $feed_url );
+		update_post_meta( $post_id, '_pronamic_feed_url', $feed_url );
+		update_post_meta( $post_id, '_pronamic_feed_post_url', $chosen_message->get_permalink() );
 
 		// Respond back
 		$this->_ajax_response( 'success', __( 'Success', 'pronamic_feeds' ), __( 'Successfully added the message to your posts!', 'pronamic_feeds' ) );
 
+	}
+
+	public function display_feed_data_metabox()
+	{
+		global $post;
+
+		Pronamic_Loader::view( 'views/admin/display_feed_data_metabox', array(
+			'post_url' => get_post_meta($post->ID, '_pronamic_feed_post_url', true)
+		) );
 	}
 
 	public function display_options() {
