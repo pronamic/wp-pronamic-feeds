@@ -1,4 +1,5 @@
 <script type="text/javascript">
+  Pronamic_Feeds_Admin.config.spinner = "<?php echo includes_url( 'images/wpspin.gif' ); ?>";
   jQuery(Pronamic_Feeds_Admin.rss.ready);
 </script>
 <h2><?php _e( 'Feeds Messages', 'pronamic_feeds' );?></h2>

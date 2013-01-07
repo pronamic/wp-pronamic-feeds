@@ -21,6 +21,8 @@ var Pronamic_Feeds_Admin = {
 
 			Pronamic_Feeds_Admin.rss.config.current_button = jQuery( this );
 
+			Pronamic_Feeds_Admin.rss.show_spinner();
+
             var message_id      = jQuery( this ).data( 'id' ),
                 hashed_id       = jQuery( this ).data( 'hashedid' ),
                 feed_url        = jQuery( this ).data( 'url' );
@@ -40,7 +42,16 @@ var Pronamic_Feeds_Admin = {
 		},
 		add_message_success:function(data){
 			Pronamic_Feeds_Admin.message.flash(data.type, data.title, data.message);
-			Pronamic_Feeds_Admin.rss.config.current_button.remove();
+			Pronamic_Feeds_Admin.rss.hide_spinner();
+		},
+		show_spinner:function(){
+			var spinner = jQuery('<img/>');
+			spinner.attr('src', Pronamic_Feeds_Admin.config.spinner);
+
+			Pronamic_Feeds_Admin.rss.config.current_button.html(spinner);
+		},
+		hide_spinner:function(){
+			Pronamic_Feeds_Admin.rss.config.current_button.empty();
 		}
 	},
 	message:{
