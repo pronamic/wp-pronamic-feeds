@@ -21,9 +21,8 @@ class Pronamic_Feeds_Admin {
 	}
 
 	public function register_admin_scripts( $hook ) {
-
-		if ( 'edit.php' == $hook )
-			wp_enqueue_script( 'pronamic_feeds_admin', plugins_url( 'pronamic-feeds/assets/admin/pronamic_feeds_admin.js' ), 'jquery' );
+		if ( 'pronamic_feed_page_pronamic_feeds_messages' == $hook )
+			wp_enqueue_script( 'pronamic_feeds_admin', plugins_url( PRONAMIC_FEEDS_BASE . '/assets/admin/pronamic_feeds_admin.js' ), 'jquery' );
 	}
 
 	public function metaboxes() {

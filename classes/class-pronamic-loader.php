@@ -4,7 +4,7 @@ class Pronamic_Loader {
 	public static function autoload( $class ) {
 		$class = strtolower( str_replace( '_' , '-', $class ) );
 
-		$classFile = PRONAMIC_FEEDS_BASE . '/classes/class-'. $class . '.php';
+		$classFile = PRONAMIC_FEEDS_DIR . '/classes/class-'. $class . '.php';
 
 		if ( file_exists( $classFile ) )
 			require_once $classFile;
@@ -15,7 +15,7 @@ class Pronamic_Loader {
 
 		ob_start();
 
-		include PRONAMIC_FEEDS_BASE . DIRECTORY_SEPARATOR . $name . '.php';
+		include PRONAMIC_FEEDS_DIR . DIRECTORY_SEPARATOR . $name . '.php';
 
 		if ( true === $return ) {
 			$buffer = ob_get_contents();

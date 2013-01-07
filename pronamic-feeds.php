@@ -8,10 +8,11 @@
  * Description: RSS Feeds to Posts plugin
  */
 
-define( 'PRONAMIC_FEEDS_BASE', dirname( __FILE__ ) );
+define( 'PRONAMIC_FEEDS_DIR', dirname( __FILE__ ) );
+define( 'PRONAMIC_FEEDS_BASE', basename( PRONAMIC_FEEDS_DIR ) );
 
 // Get the autoloader and register the autoload method
-require_once PRONAMIC_FEEDS_BASE . '/classes/class-pronamic-loader.php';
+require_once PRONAMIC_FEEDS_DIR . '/classes/class-pronamic-loader.php';
 spl_autoload_register( 'Pronamic_Loader::autoload' );
 
 // Start the plugin
