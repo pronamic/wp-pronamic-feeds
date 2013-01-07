@@ -4,6 +4,7 @@ class Pronamic_Feeds_Admin {
 	public function __construct() {
 		// Loads the required javascript
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_styles' ) );
 
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 
@@ -23,6 +24,11 @@ class Pronamic_Feeds_Admin {
 	public function register_admin_scripts( $hook ) {
 		if ( 'pronamic_feed_page_pronamic_feeds_messages' == $hook )
 			wp_enqueue_script( 'pronamic_feeds_admin', plugins_url( PRONAMIC_FEEDS_BASE . '/assets/admin/pronamic_feeds_admin.js' ), 'jquery' );
+	}
+
+	public function register_admin_styles( $hook ) {
+		if ( 'pronamic_feed_page_pronamic_feeds_messages' == $hook )
+			wp_enqueue_style( 'pronamic_feeds_admin_style', plugins_url( PRONAMIC_FEEDS_BASE . '/assets/admin/pronamic_feeds_admin_styles.css' ) );
 	}
 
 	public function metaboxes() {
