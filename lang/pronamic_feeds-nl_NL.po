@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pronamic Events\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-02 16:30+0100\n"
-"PO-Revision-Date: 2013-01-02 16:37+0100\n"
+"POT-Creation-Date: 2013-01-03 14:51+0100\n"
+"PO-Revision-Date: 2013-01-03 14:51+0100\n"
 "Last-Translator: K.Tolsma <kareljan@pronamic.nl>\n"
 "Language-Team: Pronamic <info@pronamic.nl>\n"
 "MIME-Version: 1.0\n"
@@ -34,62 +34,66 @@ msgstr "Feed"
 msgid "Messages"
 msgstr "Berichten"
 
+#: views/admin/display_feeds_messages.php:106
+msgid "Add"
+msgstr "Toevoegen"
+
 #: views/admin/pronamic_feeds_metabox_view.php:3
 msgid "URL"
 msgstr "URL"
 
-#: classes/class-pronamic-feeds.php:20
+#: classes/class-pronamic-feeds.php:19
 msgctxt "custom post type feeds"
 msgid "Feeds"
 msgstr "Feeds"
 
-#: classes/class-pronamic-feeds.php:21
+#: classes/class-pronamic-feeds.php:20
 msgctxt "custom post type singular"
 msgid "Feed"
 msgstr "Feed"
 
-#: classes/class-pronamic-feeds.php:22
+#: classes/class-pronamic-feeds.php:21
 msgctxt "add new feed"
 msgid "Add New"
 msgstr "Nieuwe toevoegen"
 
-#: classes/class-pronamic-feeds.php:23
+#: classes/class-pronamic-feeds.php:22
 msgid "Add New Feed"
 msgstr "Nieuwe feed toevoegen"
 
-#: classes/class-pronamic-feeds.php:24
+#: classes/class-pronamic-feeds.php:23
 msgid "Edit Feed"
 msgstr "Bewerk feed"
 
-#: classes/class-pronamic-feeds.php:25
+#: classes/class-pronamic-feeds.php:24
 msgid "New Feed"
 msgstr "Nieuwe feed"
 
-#: classes/class-pronamic-feeds.php:26
+#: classes/class-pronamic-feeds.php:25
 msgid "All feeds"
 msgstr "Alle feeds"
 
-#: classes/class-pronamic-feeds.php:27
+#: classes/class-pronamic-feeds.php:26
 msgid "View feed"
 msgstr "Bekijk feed"
 
-#: classes/class-pronamic-feeds.php:28
+#: classes/class-pronamic-feeds.php:27
 msgid "Search feeds"
 msgstr "Zoek feeds"
 
-#: classes/class-pronamic-feeds.php:29
+#: classes/class-pronamic-feeds.php:28
 msgid "No feeds found"
 msgstr "Geen feeds gevonden"
 
-#: classes/class-pronamic-feeds.php:30
+#: classes/class-pronamic-feeds.php:29
 msgid "No feeds found in trash"
 msgstr "Geen feeds gevonden in de prullenbak"
 
-#: classes/class-pronamic-feeds.php:31
+#: classes/class-pronamic-feeds.php:30
 msgid "Feeds:"
 msgstr "Feeds:"
 
-#: classes/class-pronamic-feeds.php:32
+#: classes/class-pronamic-feeds.php:31
 msgid "Feeds"
 msgstr "Feeds"
 

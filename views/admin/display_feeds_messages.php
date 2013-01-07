@@ -96,14 +96,14 @@
 					<?php if( !is_wp_error( $rss ) ): ?>
 						<?php $total = (get_option( 'pronamic_feeds_posts_per_feed' ) ?: 0 ) ;?>
                         <?php $total_messages   = $rss->get_item_quantity( $total ); ?>
-                        <?php $messages         = $rss->get_items( 0, $total_messages); ?>
+                        <?php $messages         = $rss->get_items( 0, $total_messages ); ?>
 						<?php if( !empty( $messages ) ): ?>
 							<table style="width:100%">								
 								<?php foreach( $messages as $key => $message): ?>
 								<tr>
-									<td style="width:90%"><?php echo $message->get_title();?></td>
+									<td style="width:90%"><?php echo $message->get_title(); ?></td>
 									<?php if( !in_array( $message->get_id( true ), $existing_ids ) ): ?>
-										<td><a href="#" class='jAddMessage' data-id="<?php echo $key;?>" data-url="<?php echo $feed_url; ?>" data-hashedid="<?php echo $message->get_id( true );?>">Add</a>
+										<td><a href="#" class='jAddMessage' data-id="<?php echo $key;?>" data-url="<?php echo $feed_url; ?>" data-hashedid="<?php echo $message->get_id( true ); ?>"><?php echo __( 'Add', 'pronamic_feeds' ); ?></a>
 									<?php endif;?>
 								<tr>
 								<?php endforeach;?>
