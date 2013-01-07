@@ -41,14 +41,24 @@ class Pronamic_Feeds_Admin {
 			'high'
 		);
 
-		add_meta_box(
-			'pronamic_feeds_data',
-			__('Feed Info', 'pronamic_feeds'),
-			array($this, 'display_feed_data_metabox'),
-			'post',
-			'side',
-			'high'
-		);
+		global $post;
+
+		if ( isset( $post ) ) {
+			$post_url = get_post_meta( $post->ID, '_pronamic_feed_post_url', true );
+
+			if ( !empty( $post_url ) ) {
+				add_meta_box(
+					'pronamic_feeds_data',
+					__( 'Feed Info', 'pronamic_feeds' ),
+					array( $this, 'display_feed_data_metabox' ),
+					'post',
+					'side',
+					'high'
+				);
+			}
+		}
+
+
 	}
 
 	public function display_details_metabox() {
@@ -198,13 +208,12 @@ class Pronamic_Feeds_Admin {
 
 	}
 
-	public function display_feed_data_metabox()
-	{
+	public function display_feed_data_metabox() {
 		global $post;
 
 		Pronamic_Loader::view( 'views/admin/display_feed_data_metabox', array(
-			'post_url' => get_post_meta($post->ID, '_pronamic_feed_post_url', true)
-		) );
+				'post_url' => get_post_meta( $post->ID, '_pronamic_feed_post_url', true )
+			) );
 	}
 
 	public function display_options() {
