@@ -2,142 +2,151 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pronamic Events\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-03 14:51+0100\n"
-"PO-Revision-Date: 2013-01-03 14:51+0100\n"
-"Last-Translator: K.Tolsma <kareljan@pronamic.nl>\n"
+"POT-Creation-Date: 2013-01-14 16:24+0100\n"
+"PO-Revision-Date: 2013-01-14 16:25+0100\n"
+"Last-Translator: Remco Tolsma <info@remcotolsma.nl>\n"
 "Language-Team: Pronamic <info@pronamic.nl>\n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;__ngettext:1,2;__withdesc;_ewithdesc;_c;_n_noop:1,2;__ngettext_noop:1,2;_x:2c,1;_nc:1,2;esc_attr_e;esc_html_e;esc_attr__;_nx:4c,1,2;_nx_noop:4c,1,2;esc_html_x:2c,1;esc_html__;_ex:2c,1\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;__ngettext:1,2;__withdesc;_ewithdesc;_c;"
+"_n_noop:1,2;__ngettext_noop:1,2;_x:2c,1;_nc:1,2;esc_attr_e;esc_html_e;"
+"esc_attr__;_nx:4c,1,2;_nx_noop:4c,1,2;esc_html_x:2c,1;esc_html__;_ex:2c,1\n"
 "X-Poedit-Basepath: ../\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: views/admin/display_options.php:3
 msgid "Pronamic Feeds Options"
 msgstr "Pronamic Feeds opties"
 
-#: views/admin/display_feeds_messages.php:78
-#: classes/class-pronamic-feeds-admin.php:77
+#: views/admin/display_feeds_messages.php:5
+#: classes/class-pronamic-feeds-admin.php:96
 msgid "Feeds Messages"
 msgstr "Feeds berichten"
 
-#: views/admin/display_feeds_messages.php:84
+#: views/admin/display_feeds_messages.php:11
 msgid "Feed"
 msgstr "Feed"
 
-#: views/admin/display_feeds_messages.php:85
-#: classes/class-pronamic-feeds-admin.php:76
+#: views/admin/display_feeds_messages.php:12
+#: classes/class-pronamic-feeds-admin.php:95
 msgid "Messages"
 msgstr "Berichten"
 
-#: views/admin/display_feeds_messages.php:106
+#: views/admin/display_feeds_messages.php:33
 msgid "Add"
 msgstr "Toevoegen"
+
+#: views/admin/display_feed_data_metabox.php:1
+msgid "From RSS Link"
+msgstr "Van RSS link"
 
 #: views/admin/pronamic_feeds_metabox_view.php:3
 msgid "URL"
 msgstr "URL"
 
-#: classes/class-pronamic-feeds.php:19
+#: classes/class-pronamic-feeds.php:15
 msgctxt "custom post type feeds"
 msgid "Feeds"
 msgstr "Feeds"
 
-#: classes/class-pronamic-feeds.php:20
+#: classes/class-pronamic-feeds.php:16
 msgctxt "custom post type singular"
 msgid "Feed"
 msgstr "Feed"
 
-#: classes/class-pronamic-feeds.php:21
+#: classes/class-pronamic-feeds.php:17
 msgctxt "add new feed"
 msgid "Add New"
 msgstr "Nieuwe toevoegen"
 
-#: classes/class-pronamic-feeds.php:22
+#: classes/class-pronamic-feeds.php:18
 msgid "Add New Feed"
 msgstr "Nieuwe feed toevoegen"
 
-#: classes/class-pronamic-feeds.php:23
+#: classes/class-pronamic-feeds.php:19
 msgid "Edit Feed"
 msgstr "Bewerk feed"
 
-#: classes/class-pronamic-feeds.php:24
+#: classes/class-pronamic-feeds.php:20
 msgid "New Feed"
 msgstr "Nieuwe feed"
 
-#: classes/class-pronamic-feeds.php:25
+#: classes/class-pronamic-feeds.php:21
 msgid "All feeds"
 msgstr "Alle feeds"
 
-#: classes/class-pronamic-feeds.php:26
+#: classes/class-pronamic-feeds.php:22
 msgid "View feed"
 msgstr "Bekijk feed"
 
-#: classes/class-pronamic-feeds.php:27
+#: classes/class-pronamic-feeds.php:23
 msgid "Search feeds"
 msgstr "Zoek feeds"
 
-#: classes/class-pronamic-feeds.php:28
+#: classes/class-pronamic-feeds.php:24
 msgid "No feeds found"
 msgstr "Geen feeds gevonden"
 
-#: classes/class-pronamic-feeds.php:29
+#: classes/class-pronamic-feeds.php:25
 msgid "No feeds found in trash"
 msgstr "Geen feeds gevonden in de prullenbak"
 
-#: classes/class-pronamic-feeds.php:30
+#: classes/class-pronamic-feeds.php:26
 msgid "Feeds:"
 msgstr "Feeds:"
 
-#: classes/class-pronamic-feeds.php:31
+#: classes/class-pronamic-feeds.php:27
 msgid "Feeds"
 msgstr "Feeds"
 
-#: classes/class-pronamic-feeds-admin.php:34
+#: classes/class-pronamic-feeds-admin.php:37
 msgid "Feed Details"
 msgstr "Feed details"
 
-#: classes/class-pronamic-feeds-admin.php:85
-#: classes/class-pronamic-feeds-admin.php:86
-#: classes/class-pronamic-feeds-admin.php:207
+#: classes/class-pronamic-feeds-admin.php:52
+msgid "Feed Info"
+msgstr "Feed informatie"
+
+#: classes/class-pronamic-feeds-admin.php:104
+#: classes/class-pronamic-feeds-admin.php:105
+#: classes/class-pronamic-feeds-admin.php:228
 msgid "Options"
 msgstr "Opties"
 
-#: classes/class-pronamic-feeds-admin.php:148
-#: classes/class-pronamic-feeds-admin.php:166
+#: classes/class-pronamic-feeds-admin.php:163
+#: classes/class-pronamic-feeds-admin.php:181
 msgid "Error"
 msgstr "Fout"
 
-#: classes/class-pronamic-feeds-admin.php:148
+#: classes/class-pronamic-feeds-admin.php:163
 msgid "No message exists! Try refreshing!"
 msgstr "Het bericht bestaat niet! Vernieuw de pagina!"
 
-#: classes/class-pronamic-feeds-admin.php:166
+#: classes/class-pronamic-feeds-admin.php:181
 msgid "That message already exists"
 msgstr "Dat bericht bestaat al"
 
-#: classes/class-pronamic-feeds-admin.php:192
+#: classes/class-pronamic-feeds-admin.php:207
 msgid "Success"
 msgstr "Succes"
 
-#: classes/class-pronamic-feeds-admin.php:192
+#: classes/class-pronamic-feeds-admin.php:207
 msgid "Successfully added the message to your posts!"
 msgstr "Het bericht is succesvol aan je berichten toegevoegd."
 
-#: classes/class-pronamic-feeds-admin.php:210
+#: classes/class-pronamic-feeds-admin.php:231
 msgid "Posts per feed"
 msgstr "Aantal berichten per feed"
 
 #~ msgctxt "post type general name"
-
 #~ msgid "Events"
 #~ msgstr "Evenementen"
-#~ msgctxt "post type singular name"
 
+#~ msgctxt "post type singular name"
 #~ msgid "Event"
 #~ msgstr "Evenement"
 
@@ -158,12 +167,12 @@ msgstr "Aantal berichten per feed"
 
 #~ msgid "Agenda"
 #~ msgstr "Agenda"
-#~ msgctxt "class general name"
 
+#~ msgctxt "class general name"
 #~ msgid "Event categories"
 #~ msgstr "Agenda categorieën"
-#~ msgctxt "class singular name"
 
+#~ msgctxt "class singular name"
 #~ msgid "Event category"
 #~ msgstr "Agenda categorieën"
 
@@ -420,7 +429,6 @@ msgstr "Aantal berichten per feed"
 #~ msgstr "versie %s"
 
 #~ msgid "Configuration deleted."
-
 #~ msgid_plural "Configurations deleted."
 #~ msgstr[0] "Configuratie verwijderd."
 #~ msgstr[1] "Configuraties verwijderd."
@@ -649,7 +657,6 @@ msgstr "Aantal berichten per feed"
 #~ msgstr "Consumenten bericht"
 
 #~ msgid "Feed deleted."
-
 #~ msgid_plural "Feeds deleted."
 #~ msgstr[0] "Feed verwijderd."
 #~ msgstr[1] "Feeds verwijderd."
@@ -1085,8 +1092,8 @@ msgstr "Aantal berichten per feed"
 
 #~ msgid "Search Transactions"
 #~ msgstr "Zoek transacties"
-#~ msgctxt "link name"
 
+#~ msgctxt "link name"
 #~ msgid "Name"
 #~ msgstr "Naam"
 
@@ -1121,12 +1128,12 @@ msgstr "Aantal berichten per feed"
 
 #~ msgid "Custom URL:"
 #~ msgstr "Maatwerk URL:"
-#~ msgctxt "post type general name"
 
+#~ msgctxt "post type general name"
 #~ msgid "Blocks"
 #~ msgstr "Blokken"
-#~ msgctxt "post type singular name"
 
+#~ msgctxt "post type singular name"
 #~ msgid "Block"
 #~ msgstr "Blok"
 
