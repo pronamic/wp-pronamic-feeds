@@ -198,6 +198,10 @@ class Pronamic_Feeds_Admin {
 		// Adds the new post
 		$post_id = wp_insert_post( $post );
 
+		// Adds to chosen category
+		if ( get_option( 'pronamic_feeds_post_to_category' ) )
+			wp_set_post_terms( $post_id, get_option( 'pronamic_feeds_post_to_category' ), 'category', false );
+
 		// Update meta information for this new post
 		update_post_meta( $post_id, '_pronamic_feed_id', $chosen_message->get_id( true ) );
 		update_post_meta( $post_id, '_pronamic_feed_url', $feed_url );
@@ -228,21 +232,55 @@ class Pronamic_Feeds_Admin {
 		add_settings_section( 'pronamic_feeds_options', __( 'Options', 'pronamic_feeds' ), array( $this, 'settings_section' ), 'pronamic_feeds_options' );
 
 		// Settings fields for the options section
-		add_settings_field( 'pronamic_feeds_posts_per_feed', __( 'Posts per feed', 'pronamic_feeds' ), array( $input, 'text' ), 'pronamic_feeds_options', 'pronamic_feeds_options', array( 'label_for' => 'pronamic_feeds_posts_per_feed' ) );
-		add_settings_field( 'pronamic_feeds_redirect_to_import', __( 'Redirect to Import?', 'pronamic_feeds' ), array( $input, 'select' ), 'pronamic_feeds_options', 'pronamic_feeds_options', array( 'label_for' => 'pronamic_feeds_redirect_to_import', 'options' => array( 
-			array(
-				'name' => __( 'Yes', 'pronamic_feeds' ),
-				'value' => 1
-			), 
-			array(
-				'name' => __( 'No', 'pronamic_feeds' ),
-				'value' => 0
-			)
-		) ) );
+		add_settings_field( 
+			'pronamic_feeds_posts_per_feed', 
+			__( 'Posts per feed', 'pronamic_feeds' ), 
+			array( $input, 'text' ), 
+			'pronamic_feeds_options', 
+			'pronamic_feeds_options', 
+			array( 'label_for' => 'pronamic_feeds_posts_per_feed' ) 
+		);
+
+		add_settings_field( 
+			'pronamic_feeds_redirect_to_import', 
+			__( 'Redirect to Import?', 'pronamic_feeds' ), 
+			array( $input, 'select' ), 
+			'pronamic_feeds_options', 
+			'pronamic_feeds_options', 
+			array( 
+				'label_for' => 'pronamic_feeds_redirect_to_import', 
+				'options' => array( 
+					array(
+						'name' => __( 'Yes', 'pronamic_feeds' ),
+						'value' => 1
+					), 
+					array(
+						'name' => __( 'No', 'pronamic_feeds' ),
+						'value' => 0
+					)
+				) 
+			) 
+		);
+
+		add_settings_field( 
+			'pronamic_feeds_post_to_category', 
+			__( 'Post to Category?', 'pronamic_feeds' ), 
+			'wp_dropdown_categories', 
+			'pronamic_feeds_options', 
+			'pronamic_feeds_options', 
+			array( 
+				'hide_empty' => 0, 
+				'name' => 'pronamic_feeds_post_to_category', 
+				'show_option_none' => __( 'None' ),
+				'selected' => get_option( 'pronamic_feeds_post_to_category' )
+			) 
+		) ;
+
 
 		// Registered settings
 		register_setting( 'pronamic_feeds_options', 'pronamic_feeds_posts_per_feed' );
 		register_setting( 'pronamic_feeds_options', 'pronamic_feeds_redirect_to_import' );
+		register_setting( 'pronamic_feeds_options', 'pronamic_feeds_post_to_category' );
 
 	}
 
