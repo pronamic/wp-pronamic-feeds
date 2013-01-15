@@ -70,3 +70,22 @@
 .alert-block p + p {
   margin-top: 5px;
 }
+
+.pronamic_feeds_have_post
+{
+  color:#69b963;
+}
+  .pronamic_feeds_have_post:hover
+  {
+    color:#52974d;
+  }
+
+.pronamic_feeds_get_post
+{
+  color:#b96363;
+}
+
+  .pronamic_feeds_get_post:hover
+  {
+    color:#994c4c;
+  }
