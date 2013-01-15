@@ -92,8 +92,8 @@ class Pronamic_Feeds_Admin {
 	public function submenus() {
 		add_submenu_page(
 			'edit.php?post_type=pronamic_feed',
-			__( 'Messages', 'pronamic_feeds' ),
-			__( 'Feeds Messages', 'pronamic_feeds' ),
+			__( 'Posts', 'pronamic_feeds' ),
+			__( 'Feeds Posts', 'pronamic_feeds' ),
 			'edit_posts',
 			'pronamic_feeds_messages',
 			array( $this, 'display_feeds_messages' )
