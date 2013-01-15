@@ -228,10 +228,21 @@ class Pronamic_Feeds_Admin {
 		add_settings_section( 'pronamic_feeds_options', __( 'Options', 'pronamic_feeds' ), array( $this, 'settings_section' ), 'pronamic_feeds_options' );
 
 		// Settings fields for the options section
-		add_settings_field( 'pronamic_feeds_posts_per_feed', __( 'Posts per feed', 'pronamic_feeds' ), array( $input, 'text' ), 'pronamic_feeds_options', 'pronamic_feeds_options', array( 'name' => 'pronamic_feeds_posts_per_feed' ) );
+		add_settings_field( 'pronamic_feeds_posts_per_feed', __( 'Posts per feed', 'pronamic_feeds' ), array( $input, 'text' ), 'pronamic_feeds_options', 'pronamic_feeds_options', array( 'label_for' => 'pronamic_feeds_posts_per_feed' ) );
+		add_settings_field( 'pronamic_feeds_redirect_to_import', __( 'Redirect to Import?', 'pronamic_feeds' ), array( $input, 'select' ), 'pronamic_feeds_options', 'pronamic_feeds_options', array( 'label_for' => 'pronamic_feeds_redirect_to_import', 'options' => array( 
+			array(
+				'name' => __( 'Yes', 'pronamic_feeds' ),
+				'value' => 1
+			), 
+			array(
+				'name' => __( 'No', 'pronamic_feeds' ),
+				'value' => 0
+			)
+		) ) );
 
 		// Registered settings
 		register_setting( 'pronamic_feeds_options', 'pronamic_feeds_posts_per_feed' );
+		register_setting( 'pronamic_feeds_options', 'pronamic_feeds_redirect_to_import' );
 
 	}
 

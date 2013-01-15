@@ -4,6 +4,8 @@ class Pronamic_Feeds {
       public function __construct() {
             add_action( 'init', array( $this, 'initialize' ) );
             add_action( 'init', array( $this, 'post_types' ) );
+
+            add_action( 'template_redirect', array( $this, 'redirect_setting') );
       }
 
       public function initialize() {
@@ -41,6 +43,25 @@ class Pronamic_Feeds {
                         'menu_position'             => 10,
                         'supports'                  => array( 'title' )
                   ) );
+      }
+
+      public function redirect_setting()
+      {
+            if ( is_singular() )
+            {
+                  $redirect = get_option( 'pronamic_feeds_redirect_to_import' );
+                  
+                  if( $redirect )
+                  {
+                        $url = get_pronamic_feed_post();
+
+                        if( ! empty( $url ) )
+                        {
+                              wp_redirect( $url, 303 );
+                              exit;
+                        }
+                  }
+            }
       }
 
 }
