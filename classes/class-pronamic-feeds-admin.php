@@ -126,16 +126,22 @@ class Pronamic_Feeds_Admin {
 
 		// Array of all existing feed ids
 		$existing_ids = array();
+		$post_ids = array();
 
 		if ( $posts->have_posts() ) {
 			foreach ( $posts->posts as $post ) {
-				$existing_ids[] = get_post_meta( $post->ID, '_pronamic_feed_id', true );
+				$_pronamic_feed_id = get_post_meta( $post->ID, '_pronamic_feed_id', true );
+
+				$existing_ids[] = $_pronamic_feed_id;
+
+				$post_ids[$_pronamic_feed_id] = $post->ID;
 			}
 		}
 
 		Pronamic_Loader::view( 'views/admin/display_feeds_messages', array(
 				'feeds'             => $feeds,
-				'existing_ids'      => $existing_ids
+				'existing_ids'      => $existing_ids,
+				'post_ids'          => $post_ids
 			) );
 	}
 
