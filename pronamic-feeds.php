@@ -15,6 +15,8 @@ define( 'PRONAMIC_FEEDS_BASE', basename( PRONAMIC_FEEDS_DIR ) );
 require_once PRONAMIC_FEEDS_DIR . '/classes/class-pronamic-loader.php';
 spl_autoload_register( 'Pronamic_Loader::autoload' );
 
+require_once "functions.php";
+
 // Start the plugin
 $pronamic_feeds = new Pronamic_Feeds;
 
