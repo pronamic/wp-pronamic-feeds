@@ -5,7 +5,7 @@ function has_pronamic_feed( $id = null )
 	if ( ! $id )
 		$id = get_the_ID();
 
-	return ( ! empty( get_pronamic_feed( $id ) ) );
+	return (boolean) get_pronamic_feed( $id );
 
 }
 
