@@ -30,7 +30,7 @@
                     <tr>
                       <?php if ( ! in_array( $message->get_id( true ), $existing_ids ) ): ?>
                         <td style="width:90%"><a class="pronamic_feeds_get_post" href="<?php echo $message->get_permalink(); ?>" target="_blank"><?php echo $message->get_title(); ?></a></td>                      
-                        <td><a href="#" class='jAddMessage' data-id="<?php echo $key;?>" data-url="<?php echo $feed_url; ?>" data-hashedid="<?php echo $message->get_id( true ); ?>"><?php echo __( 'Add', 'pronamic_feeds' ); ?></a>
+                        <td><a href="#" class='jAddMessage' data-id="<?php echo $key;?>" data-feedID="<?php echo $feed->ID; ?>" data-url="<?php echo $feed_url; ?>" data-hashedid="<?php echo $message->get_id( true ); ?>"><?php echo __( 'Add', 'pronamic_feeds' ); ?></a>
                       <?php else: ?>
                         <td style="width:90%"><a class="pronamic_feeds_have_post" href="<?php echo get_edit_post_link( $post_ids[$message->get_id( true )] ); ?>" target="_blank"><?php echo $message->get_title(); ?></a></td>
                         <td><a href="<?php echo get_delete_post_link( $post_ids[$message->get_id( true )] ); ?>"><?php _e( 'Delete' ); ?></a></td>

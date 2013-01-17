@@ -30,19 +30,19 @@ class Pronamic_Feeds {
             );
 
             register_post_type( 'pronamic_feed', array(
-                        'labels'                    => $pronamic_labels,
-                        'public'                    => false,
-                        'publicly_queryable'        => false,
-                        'show_ui'                   => true,
-                        'show_in_menu'              => true,
-                        'query_var'                 => false,
-                        'rewrite'                   => array( 'slug' => 'feeds' ),
-                        'capability_type'           => 'post',
-                        'has_archive'               => false,
-                        'hierachical'               => false,
-                        'menu_position'             => 10,
-                        'supports'                  => array( 'title' )
-                  ) );
+                  'labels'                    => $pronamic_labels,
+                  'public'                    => false,
+                  'publicly_queryable'        => false,
+                  'show_ui'                   => true,
+                  'show_in_menu'              => true,
+                  'query_var'                 => false,
+                  'rewrite'                   => array( 'slug' => 'feeds' ),
+                  'capability_type'           => 'post',
+                  'has_archive'               => false,
+                  'hierachical'               => false,
+                  'menu_position'             => 10,
+                  'supports'                  => array( 'title', 'thumbnail' )
+            ) );
       }
 
       public function redirect_setting()

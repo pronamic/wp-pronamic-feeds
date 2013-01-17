@@ -147,9 +147,10 @@ class Pronamic_Feeds_Admin {
 
 	public function add_post_from_message() {
 		// Get POST information
-		$message_id     = filter_input( INPUT_POST, 'message_id', FILTER_VALIDATE_INT );
-		$hashed_id      = filter_input( INPUT_POST, 'hashed_id', FILTER_SANITIZE_STRING );
-		$feed_url       = filter_input( INPUT_POST, 'feed_url', FILTER_VALIDATE_URL );
+        $message_id     = filter_input( INPUT_POST, 'message_id', FILTER_VALIDATE_INT );
+        $hashed_id      = filter_input( INPUT_POST, 'hashed_id', FILTER_SANITIZE_STRING );
+        $feed_url       = filter_input( INPUT_POST, 'feed_url', FILTER_VALIDATE_URL );
+        $feed_id        = filter_input( INPUT_POST, 'feed_id', FILTER_VALIDATE_INT );
 
 		// Get the feed from the
 		$rss = fetch_feed( $feed_url );
@@ -207,6 +208,13 @@ class Pronamic_Feeds_Admin {
 		// Adds to chosen category
 		if ( get_option( 'pronamic_feeds_post_to_category' ) )
 			wp_set_post_terms( $post_id, get_option( 'pronamic_feeds_post_to_category' ), 'category', false );
+
+		// Get thumbnail id from feed id
+		$feed_thumbnail_id = get_post_thumbnail_id( $feed_id );
+
+		// If is set, have it on the new post
+		if( $feed_thumbnail_id )
+			set_post_thumbnail( $post_id, $feed_thumbnail_id );
 
 		// Update meta information for this new post
 		update_post_meta( $post_id, '_pronamic_feed_id', $chosen_message->get_id( true ) );

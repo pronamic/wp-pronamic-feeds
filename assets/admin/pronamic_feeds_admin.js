@@ -25,7 +25,8 @@ var Pronamic_Feeds_Admin = {
 
             var message_id      = jQuery( this ).data( 'id' ),
                 hashed_id       = jQuery( this ).data( 'hashedid' ),
-                feed_url        = jQuery( this ).data( 'url' );
+                feed_url        = jQuery( this ).data( 'url' ),
+                feed_id         = jQuery( this ).data( 'feedid' );
 
 			jQuery.ajax({
 				url:ajaxurl,
@@ -34,7 +35,8 @@ var Pronamic_Feeds_Admin = {
 					action:'add_message',
 					message_id: message_id,
 					hashed_id: hashed_id,
-					feed_url: feed_url
+					feed_url: feed_url,
+					feed_id: feed_id
 				},
 				dataType:'json',
 				success:Pronamic_Feeds_Admin.rss.add_message_success
