@@ -173,7 +173,7 @@ class Pronamic_Feeds_Admin {
 		$chosen_message = $messages[$message_id];
 		unset( $messages );
 
-		$post = new Wp_Query( array(
+		$post = new WP_Query( array(
 				'post_type'     => 'post',
 				'meta_query'    => array(
 					array(
