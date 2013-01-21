@@ -110,13 +110,13 @@ class Pronamic_Feeds_Admin {
 	}
 
 	public function display_feeds_messages() {
-		$feeds = new Wp_Query( array(
+		$feeds = new WP_Query( array(
 				'post_type' => 'pronamic_feed',
 				'posts_per_page' => -1
 			) );
 
 		// Get all posts with a set feed id
-		$posts = new Wp_Query( array(
+		$posts = new WP_Query( array(
 				'post_type'     => 'post',
 				'meta_query'    => array(
 					array(
@@ -175,7 +175,7 @@ class Pronamic_Feeds_Admin {
 		$chosen_message = $messages[$message_id];
 		unset( $messages );
 
-		$post = new Wp_Query( array(
+		$post = new WP_Query( array(
 				'post_type'     => 'post',
 				'meta_query'    => array(
 					array(
