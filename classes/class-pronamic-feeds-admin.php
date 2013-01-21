@@ -111,7 +111,8 @@ class Pronamic_Feeds_Admin {
 
 	public function display_feeds_messages() {
 		$feeds = new Wp_Query( array(
-				'post_type' => 'pronamic_feed'
+				'post_type' => 'pronamic_feed',
+				'posts_per_page' => -1
 			) );
 
 		// Get all posts with a set feed id
@@ -121,7 +122,8 @@ class Pronamic_Feeds_Admin {
 					array(
 						'key' => '_pronamic_feed_id',
 					)
-				)
+				),
+				'posts_per_page' => -1
 			) );
 
 		// Array of all existing feed ids
