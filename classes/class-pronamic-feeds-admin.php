@@ -123,22 +123,25 @@ class Pronamic_Feeds_Admin {
 						'key' => '_pronamic_feed_id',
 					)
 				),
-				'posts_per_page' => -1
+				'posts_per_page' => -1,
+				'fields' => 'ids'
 			) );
 
 		// Array of all existing feed ids
 		$existing_ids = array();
 		$post_ids = array();
+		
+		if ( ! empty( $posts->posts ) ) {
 
-		if ( $posts->have_posts() ) {
-			foreach ( $posts->posts as $post ) {
-				$_pronamic_feed_id = get_post_meta( $post->ID, '_pronamic_feed_id', true );
+			foreach ( $posts->posts as $id ) {
+				$_pronamic_feed_id = get_post_meta( $id, '_pronamic_feed_id', true );
 
 				$existing_ids[] = $_pronamic_feed_id;
 
-				$post_ids[$_pronamic_feed_id] = $post->ID;
+				$post_ids[$_pronamic_feed_id] = $id;
 			}
 		}
+		
 
 		Pronamic_Loader::view( 'views/admin/display_feeds_messages', array(
 				'feeds'             => $feeds,
