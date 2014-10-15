@@ -202,7 +202,7 @@ class Pronamic_Feeds_Admin {
 			'post_name'         => sanitize_title_with_dashes( $chosen_message->get_title() ),
 			'post_parent'       => null,
 			'post_password'     => null,
-			'post_status'       => 'publish', // base off setting wether to require moderation
+			'post_status'       => 'draft', // base off setting wether to require moderation
 			'post_title'        => $chosen_message->get_title(),
 			'post_type'         => 'post' // base off input text setting
 		);

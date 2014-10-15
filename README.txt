@@ -3,7 +3,7 @@ Contributors: pronamic, zogot, remcotolsma
 Tags: rss, feeds, posts
 Requires at least: 3.2
 Tested up to: 3.5
-Stable Tag: 1.1
+Stable Tag: 1.2.0
 
 == Description ==
 
@@ -11,10 +11,16 @@ Pronamic Feeds allow you to add RSS feeds to your site, that will enable the cop
 
 == Installation ==
 
-1. Upload 'pronamic-feeds' to the '/wp-content/plugins/' directory, 
-2. Activate the plugin through the 'Plugins' menu in WordPress.
+1.	Upload 'pronamic-feeds' to the '/wp-content/plugins/' directory, 
+2.	Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
 
-= 1.0 =
-* Initial release
+= 1.2.0 =
+*	Change post status to 'draft' by default.
+
+= 1.1.0 =
+*	First stable relase.
+
+= 1.0.0 =
+*	Initial release.
