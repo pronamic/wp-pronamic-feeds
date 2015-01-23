@@ -4,7 +4,7 @@ Plugin Name: Pronamic Feeds
 Plugin URI: http://www.happywp.com/plugins/pronamic-feeds/
 Description: Pronamic Feeds allow you to add RSS feeds to your site, that will enable the copying of content from the remote link to your own posts.
 
-Version: 1.2.0
+Version: 1.2.1
 Requires at least: 3.6
 
 Author: Pronamic

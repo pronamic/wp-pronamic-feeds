@@ -1,9 +1,9 @@
 === Pronamic Feeds ===
-Contributors: pronamic, zogot, remcotolsma
+Contributors: pronamic, remcotolsma
 Tags: rss, feeds, posts
 Requires at least: 3.2
-Tested up to: 3.5
-Stable Tag: 1.2.0
+Tested up to: 4.1
+Stable Tag: 1.2.1
 
 == Description ==
 
