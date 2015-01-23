@@ -16,6 +16,9 @@ Pronamic Feeds allow you to add RSS feeds to your site, that will enable the cop
 
 == Changelog ==
 
+= 1.2.1 =
+*	Added an default post status setting.
+
 = 1.2.0 =
 *	Change post status to 'draft' by default.
 
