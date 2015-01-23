@@ -1,7 +1,10 @@
+# Deploy
+/deploy/
+
 # Eclipse
 /.buildpath
 /.project
-/.settings
+/.settings/
 
 # Node.js
 /node_modules/
