@@ -193,6 +193,9 @@ class Pronamic_Feeds_Admin {
 			$this->_ajax_response( 'error', __( 'Error', 'pronamic_feeds' ), __( 'That message already exists', 'pronamic_feeds' ) );
 
 		// Generate post array of information
+		$post_status = get_option( 'pronamic_feeds_post_status' );
+		$post_status = empty( $post_status ) ? 'publish' : $post_status;
+
 		$post = array(
 			'comment_status'    => 'closed', // add setting on options page
 			'ping_status'       => 'closed', // add setting
@@ -202,7 +205,7 @@ class Pronamic_Feeds_Admin {
 			'post_name'         => sanitize_title_with_dashes( $chosen_message->get_title() ),
 			'post_parent'       => null,
 			'post_password'     => null,
-			'post_status'       => 'draft', // base off setting wether to require moderation
+			'post_status'       => $post_status, // base off setting wether to require moderation
 			'post_title'        => $chosen_message->get_title(),
 			'post_type'         => 'post' // base off input text setting
 		);
@@ -295,11 +298,32 @@ class Pronamic_Feeds_Admin {
 			) 
 		) ;
 
+		add_settings_field( 
+			'pronamic_feeds_post_status', 
+			__( 'Post Status', 'pronamic_feeds' ), 
+			array( $input, 'select' ), 
+			'pronamic_feeds_options', 
+			'pronamic_feeds_options', 
+			array( 
+				'label_for' => 'pronamic_feeds_post_status', 
+				'options' => array( 
+					array(
+						'name' => __( 'Publish', 'pronamic_feeds' ),
+						'value' => 'publish',
+					), 
+					array(
+						'name' => __( 'Draft', 'pronamic_feeds' ),
+						'value' => 'draft',
+					)
+				) 
+			) 
+		);
 
 		// Registered settings
 		register_setting( 'pronamic_feeds_options', 'pronamic_feeds_posts_per_feed' );
 		register_setting( 'pronamic_feeds_options', 'pronamic_feeds_redirect_to_import' );
 		register_setting( 'pronamic_feeds_options', 'pronamic_feeds_post_to_category' );
+		register_setting( 'pronamic_feeds_options', 'pronamic_feeds_post_status' );
 
 	}
 
