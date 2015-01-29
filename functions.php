@@ -24,3 +24,9 @@ function get_pronamic_feed_post( $id = null )
 
 	return get_post_meta( $id, '_pronamic_feed_post_url', true );
 }
+
+function pronamic_feed_cache_lifetime( $seconds ) {
+  return 3600;
+}
+
+add_filter( 'wp_feed_cache_transient_lifetime' , 'pronamic_feed_cache_lifetime' );
