@@ -5,7 +5,7 @@ class Pronamic_Feeds {
 			add_action( 'init', array( $this, 'initialize' ) );
 			add_action( 'init', array( $this, 'post_types' ) );
 
-			add_action( 'template_redirect', array( $this, 'redirect_setting') );
+			add_action( 'template_redirect', array( $this, 'redirect_setting' ) );
 		}
 
 		public function initialize() {
