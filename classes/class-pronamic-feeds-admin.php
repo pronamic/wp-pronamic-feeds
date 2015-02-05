@@ -22,13 +22,13 @@ class Pronamic_Feeds_Admin {
 	}
 
 	public function register_admin_scripts( $hook ) {
-		if ( 'pronamic_feed_page_pronamic_feeds_messages' == $hook )
-			wp_enqueue_script( 'pronamic_feeds_admin', plugins_url( PRONAMIC_FEEDS_BASE . '/assets/admin/pronamic_feeds_admin.js' ), 'jquery' );
+		if ( 'pronamic_feed_page_pronamic_feeds_messages' == $hook ) {
+			wp_enqueue_script( 'pronamic_feeds_admin', plugins_url( PRONAMIC_FEEDS_BASE . '/assets/admin/pronamic_feeds_admin.js' ), 'jquery' ); }
 	}
 
 	public function register_admin_styles( $hook ) {
-		if ( 'pronamic_feed_page_pronamic_feeds_messages' == $hook )
-			wp_enqueue_style( 'pronamic_feeds_admin_style', plugins_url( PRONAMIC_FEEDS_BASE . '/assets/admin/pronamic_feeds_admin_styles.css' ) );
+		if ( 'pronamic_feed_page_pronamic_feeds_messages' == $hook ) {
+			wp_enqueue_style( 'pronamic_feeds_admin_style', plugins_url( PRONAMIC_FEEDS_BASE . '/assets/admin/pronamic_feeds_admin_styles.css' ) ); }
 	}
 
 	public function metaboxes() {
@@ -46,7 +46,7 @@ class Pronamic_Feeds_Admin {
 		if ( isset( $post ) ) {
 			$post_url = get_post_meta( $post->ID, '_pronamic_feed_post_url', true );
 
-			if ( !empty( $post_url ) ) {
+			if ( ! empty( $post_url ) ) {
 				add_meta_box(
 					'pronamic_feeds_data',
 					__( 'Feed Info', 'pronamic_feeds' ),
@@ -57,7 +57,6 @@ class Pronamic_Feeds_Admin {
 				);
 			}
 		}
-
 
 	}
 
@@ -74,19 +73,19 @@ class Pronamic_Feeds_Admin {
 	}
 
 	public function save_details_metabox( $post_id ) {
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
-			return;
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return; }
 
-		if ( !isset( $_POST['pronamic_feeds_metabox'] ) || !wp_verify_nonce( $_POST['pronamic_feeds_metabox'], basename( __FILE__ ) ) )
-			return;
+		if ( ! isset( $_POST['pronamic_feeds_metabox'] ) || ! wp_verify_nonce( $_POST['pronamic_feeds_metabox'], basename( __FILE__ ) ) ) {
+			return; }
 
-		if ( !current_user_can( 'edit_post' ) )
-			return;
+		if ( ! current_user_can( 'edit_post' ) ) {
+			return; }
 
 		$pronamic_feed_url = filter_input( INPUT_POST, 'pronamic_feed_url', FILTER_VALIDATE_URL );
 
-		if ( !empty( $pronamic_feed_url ) )
-			update_post_meta( $post_id, 'pronamic_feed_url' , $pronamic_feed_url );
+		if ( ! empty( $pronamic_feed_url ) ) {
+			update_post_meta( $post_id, 'pronamic_feed_url' , $pronamic_feed_url ); }
 	}
 
 	public function submenus() {
@@ -130,7 +129,7 @@ class Pronamic_Feeds_Admin {
 		// Array of all existing feed ids
 		$existing_ids = array();
 		$post_ids = array();
-		
+
 		if ( ! empty( $posts->posts ) ) {
 
 			foreach ( $posts->posts as $id ) {
@@ -141,7 +140,6 @@ class Pronamic_Feeds_Admin {
 				$post_ids[$_pronamic_feed_id] = $id;
 			}
 		}
-		
 
 		Pronamic_Loader::view( 'views/admin/display_feeds_messages', array(
 				'feeds'             => $feeds,
@@ -152,16 +150,16 @@ class Pronamic_Feeds_Admin {
 
 	public function add_post_from_message() {
 		// Get POST information
-        $message_id     = filter_input( INPUT_POST, 'message_id', FILTER_VALIDATE_INT );
-        $hashed_id      = filter_input( INPUT_POST, 'hashed_id', FILTER_SANITIZE_STRING );
-        $feed_url       = filter_input( INPUT_POST, 'feed_url', FILTER_VALIDATE_URL );
-        $feed_id        = filter_input( INPUT_POST, 'feed_id', FILTER_VALIDATE_INT );
+		$message_id     = filter_input( INPUT_POST, 'message_id', FILTER_VALIDATE_INT );
+		$hashed_id      = filter_input( INPUT_POST, 'hashed_id', FILTER_SANITIZE_STRING );
+		$feed_url       = filter_input( INPUT_POST, 'feed_url', FILTER_VALIDATE_URL );
+		$feed_id        = filter_input( INPUT_POST, 'feed_id', FILTER_VALIDATE_INT );
 
 		// Get the feed from the
 		$rss = pronamic_feeds_fetch_feed( $feed_url );
 
-		if ( is_wp_error( $rss ) )
-			exit;
+		if ( is_wp_error( $rss ) ) {
+			exit; }
 
 		// Gets quantity with a limit of 20, incase they try to add a message that is no longer
 		// available from the latest 10
@@ -171,8 +169,8 @@ class Pronamic_Feeds_Admin {
 		$messages = $rss->get_items( 0, $total );
 
 		// CHecks there are messages and a message with the passed array id
-		if ( empty( $messages ) || empty( $messages[$message_id] ) )
-			$this->_ajax_response( 'error', __( 'Error', 'pronamic_feeds' ), __( 'No message exists! Try refreshing!', 'pronamic_feeds' ) );
+		if ( empty( $messages ) || empty( $messages[$message_id] ) ) {
+			$this->_ajax_response( 'error', __( 'Error', 'pronamic_feeds' ), __( 'No message exists! Try refreshing!', 'pronamic_feeds' ) ); }
 
 		// Gets the chosen message and cleans up memory
 		$chosen_message = $messages[$message_id];
@@ -189,8 +187,8 @@ class Pronamic_Feeds_Admin {
 			) );
 
 		// Determine if they already exist
-		if ( $post->have_posts() )
-			$this->_ajax_response( 'error', __( 'Error', 'pronamic_feeds' ), __( 'That message already exists', 'pronamic_feeds' ) );
+		if ( $post->have_posts() ) {
+			$this->_ajax_response( 'error', __( 'Error', 'pronamic_feeds' ), __( 'That message already exists', 'pronamic_feeds' ) ); }
 
 		// Generate post array of information
 		$post_status = get_option( 'pronamic_feeds_post_status' );
@@ -214,15 +212,15 @@ class Pronamic_Feeds_Admin {
 		$post_id = wp_insert_post( $post );
 
 		// Adds to chosen category
-		if ( get_option( 'pronamic_feeds_post_to_category' ) )
-			wp_set_post_terms( $post_id, get_option( 'pronamic_feeds_post_to_category' ), 'category', false );
+		if ( get_option( 'pronamic_feeds_post_to_category' ) ) {
+			wp_set_post_terms( $post_id, get_option( 'pronamic_feeds_post_to_category' ), 'category', false ); }
 
 		// Get thumbnail id from feed id
 		$feed_thumbnail_id = get_post_thumbnail_id( $feed_id );
 
 		// If is set, have it on the new post
-		if( $feed_thumbnail_id )
-			set_post_thumbnail( $post_id, $feed_thumbnail_id );
+		if ( $feed_thumbnail_id ) {
+			set_post_thumbnail( $post_id, $feed_thumbnail_id ); }
 
 		// Update meta information for this new post
 		update_post_meta( $post_id, '_pronamic_feed_id', $chosen_message->get_id( true ) );
@@ -254,69 +252,69 @@ class Pronamic_Feeds_Admin {
 		add_settings_section( 'pronamic_feeds_options', __( 'Options', 'pronamic_feeds' ), array( $this, 'settings_section' ), 'pronamic_feeds_options' );
 
 		// Settings fields for the options section
-		add_settings_field( 
-			'pronamic_feeds_posts_per_feed', 
-			__( 'Posts per feed', 'pronamic_feeds' ), 
-			array( $input, 'text' ), 
-			'pronamic_feeds_options', 
-			'pronamic_feeds_options', 
-			array( 'label_for' => 'pronamic_feeds_posts_per_feed' ) 
+		add_settings_field(
+			'pronamic_feeds_posts_per_feed',
+			__( 'Posts per feed', 'pronamic_feeds' ),
+			array( $input, 'text' ),
+			'pronamic_feeds_options',
+			'pronamic_feeds_options',
+			array( 'label_for' => 'pronamic_feeds_posts_per_feed' )
 		);
 
-		add_settings_field( 
-			'pronamic_feeds_redirect_to_import', 
-			__( 'Redirect to Import?', 'pronamic_feeds' ), 
-			array( $input, 'select' ), 
-			'pronamic_feeds_options', 
-			'pronamic_feeds_options', 
-			array( 
-				'label_for' => 'pronamic_feeds_redirect_to_import', 
-				'options' => array( 
+		add_settings_field(
+			'pronamic_feeds_redirect_to_import',
+			__( 'Redirect to Import?', 'pronamic_feeds' ),
+			array( $input, 'select' ),
+			'pronamic_feeds_options',
+			'pronamic_feeds_options',
+			array(
+				'label_for' => 'pronamic_feeds_redirect_to_import',
+				'options' => array(
 					array(
 						'name' => __( 'Yes', 'pronamic_feeds' ),
 						'value' => 1
-					), 
+					),
 					array(
 						'name' => __( 'No', 'pronamic_feeds' ),
 						'value' => 0
 					)
-				) 
-			) 
+				)
+			)
 		);
 
-		add_settings_field( 
-			'pronamic_feeds_post_to_category', 
-			__( 'Post to Category?', 'pronamic_feeds' ), 
-			'wp_dropdown_categories', 
-			'pronamic_feeds_options', 
-			'pronamic_feeds_options', 
-			array( 
-				'hide_empty' => 0, 
-				'name' => 'pronamic_feeds_post_to_category', 
+		add_settings_field(
+			'pronamic_feeds_post_to_category',
+			__( 'Post to Category?', 'pronamic_feeds' ),
+			'wp_dropdown_categories',
+			'pronamic_feeds_options',
+			'pronamic_feeds_options',
+			array(
+				'hide_empty' => 0,
+				'name' => 'pronamic_feeds_post_to_category',
 				'show_option_none' => __( 'None' ),
 				'selected' => get_option( 'pronamic_feeds_post_to_category' )
-			) 
-		) ;
+			)
+		);
 
-		add_settings_field( 
-			'pronamic_feeds_post_status', 
-			__( 'Post Status', 'pronamic_feeds' ), 
-			array( $input, 'select' ), 
-			'pronamic_feeds_options', 
-			'pronamic_feeds_options', 
-			array( 
-				'label_for' => 'pronamic_feeds_post_status', 
-				'options' => array( 
+		add_settings_field(
+			'pronamic_feeds_post_status',
+			__( 'Post Status', 'pronamic_feeds' ),
+			array( $input, 'select' ),
+			'pronamic_feeds_options',
+			'pronamic_feeds_options',
+			array(
+				'label_for' => 'pronamic_feeds_post_status',
+				'options' => array(
 					array(
 						'name' => __( 'Publish', 'pronamic_feeds' ),
 						'value' => 'publish',
-					), 
+					),
 					array(
 						'name' => __( 'Draft', 'pronamic_feeds' ),
 						'value' => 'draft',
 					)
-				) 
-			) 
+				)
+			)
 		);
 
 		// Registered settings
