@@ -158,7 +158,7 @@ class Pronamic_Feeds_Admin {
         $feed_id        = filter_input( INPUT_POST, 'feed_id', FILTER_VALIDATE_INT );
 
 		// Get the feed from the
-		$rss = fetch_feed( $feed_url );
+		$rss = pronamic_feeds_fetch_feed( $feed_url );
 
 		if ( is_wp_error( $rss ) )
 			exit;
