@@ -14,19 +14,16 @@ class Pronamic_Settings {
 	public function select( $args ) {
 		$chosen = get_option( $args['label_for'] );
 
-		$html = "<select name='{$args['label_for']}'>";
+		printf( '<select name="%s">', $args['label_for'] );
 
 		foreach ( $args['options'] as $option ) {
 			if ( $chosen == $option['value'] ) {
-				$html .= "<option value='{$option['value']}' selected='selected'>{$option['name']}</option>";
-			}
-			else {
-				$html .= "<option value='{$option['value']}'>{$option['name']}</option>";
+				printf( '<option value="%s" selected="selected">%s</option>', esc_attr( $option['value'] ), esc_html( $option['name'] ) );
+			} else {
+				printf( '<option value="%s">%s</option>', esc_attr( $option['value'] ), esc_html( $option['name'] ) );
 			}
 		}
 
-		$html .= '</select>';
-
-		echo $html;
+		printf( '</select>' );
 	}
 }

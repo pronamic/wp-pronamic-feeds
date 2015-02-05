@@ -6,8 +6,8 @@ class Pronamic_Loader {
 
 		$classFile = PRONAMIC_FEEDS_DIR . '/classes/class-'. $class . '.php';
 
-		if ( file_exists( $classFile ) )
-			require_once $classFile;
+		if ( file_exists( $classFile ) ) {
+			require_once $classFile; }
 	}
 
 	public static function view( $name, $vars = array(), $return = false ) {
