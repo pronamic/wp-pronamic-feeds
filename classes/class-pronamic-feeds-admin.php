@@ -110,20 +110,20 @@ class Pronamic_Feeds_Admin {
 
 	public function display_feeds_messages() {
 		$feeds = new WP_Query( array(
-				'post_type' => 'pronamic_feed',
-				'posts_per_page' => -1
+				'post_type'      => 'pronamic_feed',
+				'posts_per_page' => -1,
 			) );
 
 		// Get all posts with a set feed id
 		$posts = new WP_Query( array(
-				'post_type'     => 'post',
-				'meta_query'    => array(
+				'post_type'      => 'post',
+				'meta_query'     => array(
 					array(
 						'key' => '_pronamic_feed_id',
-					)
+					),
 				),
 				'posts_per_page' => -1,
-				'fields' => 'ids'
+				'fields'         => 'ids',
 			) );
 
 		// Array of all existing feed ids
@@ -137,14 +137,14 @@ class Pronamic_Feeds_Admin {
 
 				$existing_ids[] = $_pronamic_feed_id;
 
-				$post_ids[$_pronamic_feed_id] = $id;
+				$post_ids[ $_pronamic_feed_id ] = $id;
 			}
 		}
 
 		Pronamic_Loader::view( 'views/admin/display_feeds_messages', array(
-				'feeds'             => $feeds,
-				'existing_ids'      => $existing_ids,
-				'post_ids'          => $post_ids
+				'feeds'        => $feeds,
+				'existing_ids' => $existing_ids,
+				'post_ids'     => $post_ids,
 			) );
 	}
 
@@ -159,7 +159,8 @@ class Pronamic_Feeds_Admin {
 		$rss = pronamic_feeds_fetch_feed( $feed_url );
 
 		if ( is_wp_error( $rss ) ) {
-			exit; }
+			exit;
+		}
 
 		// Gets quantity with a limit of 20, incase they try to add a message that is no longer
 		// available from the latest 10
@@ -169,11 +170,11 @@ class Pronamic_Feeds_Admin {
 		$messages = $rss->get_items( 0, $total );
 
 		// CHecks there are messages and a message with the passed array id
-		if ( empty( $messages ) || empty( $messages[$message_id] ) ) {
+		if ( empty( $messages ) || empty( $messages[ $message_id ] ) ) {
 			$this->_ajax_response( 'error', __( 'Error', 'pronamic_feeds' ), __( 'No message exists! Try refreshing!', 'pronamic_feeds' ) ); }
 
 		// Gets the chosen message and cleans up memory
-		$chosen_message = $messages[$message_id];
+		$chosen_message = $messages[ $message_id ];
 		unset( $messages );
 
 		$post = new WP_Query( array(
@@ -181,9 +182,9 @@ class Pronamic_Feeds_Admin {
 				'meta_query'    => array(
 					array(
 						'key'       => '_pronamic_feed_id',
-						'value'     => $chosen_message->get_id( true )
-					)
-				)
+						'value'     => $chosen_message->get_id( true ),
+					),
+				),
 			) );
 
 		// Determine if they already exist
@@ -195,17 +196,17 @@ class Pronamic_Feeds_Admin {
 		$post_status = empty( $post_status ) ? 'publish' : $post_status;
 
 		$post = array(
-			'comment_status'    => 'closed', // add setting on options page
-			'ping_status'       => 'closed', // add setting
-			'post_author'       => get_current_user_id(),
-			'post_content'      => $chosen_message->get_content(),
-			'post_excerpt'      => '', // base off setting wether to get excerpt or not
-			'post_name'         => sanitize_title_with_dashes( $chosen_message->get_title() ),
-			'post_parent'       => null,
-			'post_password'     => null,
-			'post_status'       => $post_status, // base off setting wether to require moderation
-			'post_title'        => $chosen_message->get_title(),
-			'post_type'         => 'post' // base off input text setting
+			'comment_status' => 'closed', // add setting on options page
+			'ping_status'    => 'closed', // add setting
+			'post_author'    => get_current_user_id(),
+			'post_content'   => $chosen_message->get_content(),
+			'post_excerpt'   => '', // base off setting wether to get excerpt or not
+			'post_name'      => sanitize_title_with_dashes( $chosen_message->get_title() ),
+			'post_parent'    => null,
+			'post_password'  => null,
+			'post_status'    => $post_status, // base off setting wether to require moderation
+			'post_title'     => $chosen_message->get_title(),
+			'post_type'      => 'post', // base off input text setting
 		);
 
 		// Adds the new post
@@ -213,7 +214,8 @@ class Pronamic_Feeds_Admin {
 
 		// Adds to chosen category
 		if ( get_option( 'pronamic_feeds_post_to_category' ) ) {
-			wp_set_post_terms( $post_id, get_option( 'pronamic_feeds_post_to_category' ), 'category', false ); }
+			wp_set_post_terms( $post_id, get_option( 'pronamic_feeds_post_to_category' ), 'category', false );
+		}
 
 		// Get thumbnail id from feed id
 		$feed_thumbnail_id = get_post_thumbnail_id( $feed_id );
@@ -236,8 +238,8 @@ class Pronamic_Feeds_Admin {
 		global $post;
 
 		Pronamic_Loader::view( 'views/admin/display_feed_data_metabox', array(
-				'post_url' => get_post_meta( $post->ID, '_pronamic_feed_post_url', true )
-			) );
+			'post_url' => get_post_meta( $post->ID, '_pronamic_feed_post_url', true ),
+		) );
 	}
 
 	public function display_options() {
@@ -272,13 +274,13 @@ class Pronamic_Feeds_Admin {
 				'options' => array(
 					array(
 						'name' => __( 'Yes', 'pronamic_feeds' ),
-						'value' => 1
+						'value' => 1,
 					),
 					array(
 						'name' => __( 'No', 'pronamic_feeds' ),
-						'value' => 0
-					)
-				)
+						'value' => 0,
+					),
+				),
 			)
 		);
 
@@ -289,10 +291,10 @@ class Pronamic_Feeds_Admin {
 			'pronamic_feeds_options',
 			'pronamic_feeds_options',
 			array(
-				'hide_empty' => 0,
-				'name' => 'pronamic_feeds_post_to_category',
+				'hide_empty'       => 0,
+				'name'             => 'pronamic_feeds_post_to_category',
 				'show_option_none' => __( 'None' ),
-				'selected' => get_option( 'pronamic_feeds_post_to_category' )
+				'selected'         => get_option( 'pronamic_feeds_post_to_category' ),
 			)
 		);
 
@@ -312,8 +314,8 @@ class Pronamic_Feeds_Admin {
 					array(
 						'name' => __( 'Draft', 'pronamic_feeds' ),
 						'value' => 'draft',
-					)
-				)
+					),
+				),
 			)
 		);
 
@@ -336,9 +338,9 @@ class Pronamic_Feeds_Admin {
 	 */
 	private function _ajax_response( $type, $title, $message ) {
 		echo json_encode( array(
-				'type'      => $type,
-				'title'     => $title,
-				'message'   => $message
+				'type'    => $type,
+				'title'   => $title,
+				'message' => $message,
 			) );
 
 		exit;
