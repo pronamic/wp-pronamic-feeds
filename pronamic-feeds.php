@@ -25,11 +25,12 @@ define( 'PRONAMIC_FEEDS_BASE', basename( PRONAMIC_FEEDS_DIR ) );
 require_once PRONAMIC_FEEDS_DIR . '/classes/class-pronamic-loader.php';
 spl_autoload_register( 'Pronamic_Loader::autoload' );
 
-require_once "functions.php";
+require_once 'functions.php';
 
 // Start the plugin
-$pronamic_feeds = new Pronamic_Feeds;
+$pronamic_feeds = new Pronamic_Feeds();
 
 // Load Admin Class if admin logged in
-if ( is_admin() )
-	$pronamic_feeds_admin = new Pronamic_Feeds_Admin;
+if ( is_admin() ) {
+	$pronamic_feeds_admin = new Pronamic_Feeds_Admin();
+}
